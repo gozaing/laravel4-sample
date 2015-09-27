@@ -65,3 +65,31 @@ Route::post('happy-birthday', function(){
        'message' => '引数"birthday_present"は必ず添付してください。',
        ],400);
 });
+
+Route::group(['prefix' => 'todos'], function() {
+    Route::get('', [
+        'as' => 'todos.index',
+        'uses' => 'TodosController@index',
+    ]);
+    Route::post('', [
+        'as' => 'todos.store',
+        'uses' => 'TodosController@store',
+    ]);
+    Route::post('{id}/update', [
+        'as' => 'todos.update',
+        'uses' => 'TodosController@update',
+    ]);
+    Route::put('{id}/title', [
+        'as' => 'todos.update-title',
+        'uses' => 'TodosController@ajaxUpdateTitle',
+    ]);
+    Route::post('{id}/delete', [
+        'as' => 'todos.delete',
+        'uses' => 'TodosController@delete',
+    ]);
+    Route::post('{id}/restore', [
+        'as' => 'todos.restore',
+        'uses' => 'TodosController@restore',
+    ]);
+
+})
